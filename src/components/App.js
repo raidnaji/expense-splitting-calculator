@@ -2,6 +2,7 @@ import "../styles/App.css";
 import firebase from "../config/firebase.js";
 import { useEffect, useState } from "react";
 
+import Header from './Header';
 import ExpenseList from './ExpenseList';
 import ExpenseForm from './ExpenseForm';
 import IncomeForm from './IncomeForm';
@@ -148,15 +149,9 @@ function App() {
             <Warning />
           </div>
 
-
-
-          <header>
-            <h1>Expense Splitting Calculator</h1>
-          </header>
+          <Header />
 
           <main>
-
-          <div className="forms">
 
             <div className="incomeBox">
               <IncomeForm
@@ -167,45 +162,49 @@ function App() {
               />
             </div>
 
-            <ExpenseForm
-              expenseItem={expenseItem}
-              amount={amount}
-              handleSubmitClick={handleSubmitClick}
-              handleExpenseItem={handleExpenseItem}
-              handleExpenseAmount={handleExpenseAmount}
-            />
-          </div>
+            <div className="forms">
+              <ExpenseForm
+                expenseItem={expenseItem}
+                amount={amount}
+                handleSubmitClick={handleSubmitClick}
+                handleExpenseItem={handleExpenseItem}
+                handleExpenseAmount={handleExpenseAmount}
+              />
+            </div>
 
-          <div className="expenseTotal">
-            <h2>
-              Total Expenses: <span className="finalExpenses">
-                ${expenses.reduce((accumulator, current) => {
-              return (accumulator += parseInt(current.amount))
-            }, 0)}
-              </span>
-            </h2>
-            <h2>
-              You will pay <span className="total">{Math.round(userIncomeRatio * 100)}%</span> of expenses of <span className="total">${Math.round(expenses.reduce((accumulator, current) => {
-              return (accumulator += parseInt(current.amount) * userIncomeRatio)
-            }, 0))}/month.</span>
-            </h2>
-            <h2>
-              Partner will pay <span className="total">{Math.round(partnerIncomeRatio * 100)}%</span> of expenses of <span className="total">${
-                Math.round(expenses.reduce((accumulator, current) => {
-                  return (accumulator += parseInt(current.amount) * partnerIncomeRatio)
-                }, 0)
-                )}/month.</span>
-            </h2>
-          </div>
+            <div className="expenseTotal">
 
-          <div className="listBox">
-            <ExpenseList
-              expenses={expenses}
-              handleClearList={handleClearList}
-              handleDelete={handleDelete}
-            />
-          </div>
-          
+              <p className="expenseTotalText">
+                Total Expenses: <span className="finalExpenses">
+                  ${expenses.reduce((accumulator, current) => {
+                return (accumulator += parseInt(current.amount))
+              }, 0)}
+                </span>
+              </p>
+
+              <p className="expenseTotalText">
+                You will pay <span className="total">{Math.round(userIncomeRatio * 100)}%</span> of expenses of <span className="total">${Math.round(expenses.reduce((accumulator, current) => {
+                return (accumulator += parseInt(current.amount) * userIncomeRatio)
+              }, 0))}/month.</span>
+              </p>
+
+              <p className="expenseTotalText">
+                Partner will pay <span className="total">{Math.round(partnerIncomeRatio * 100)}%</span> of expenses of <span className="total">${
+                  Math.round(expenses.reduce((accumulator, current) => {
+                    return (accumulator += parseInt(current.amount) * partnerIncomeRatio)
+                  }, 0)
+                  )}/month.</span>
+              </p>
+
+            </div>
+
+            <div className="listBox">
+              <ExpenseList
+                expenses={expenses}
+                handleClearList={handleClearList}
+                handleDelete={handleDelete}
+              />
+            </div>
           </main>
         </div>
 

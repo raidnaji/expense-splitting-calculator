@@ -3,15 +3,16 @@ import { Fragment } from 'react'
 const ExpenseForm = ({ expenseItem, amount, handleSubmitClick, handleExpenseItem, handleExpenseAmount}) => {
     return (
         <Fragment >
-            <form action="" onSubmit={handleSubmitClick}>
+            <form action="submit" onSubmit={handleSubmitClick}>
 
                 <div className="formCenter">
                     <div className="formGroup">
                         <label htmlFor="expenseItem">expense</label>
                         <input 
+                        id="expenseItem"
                         type="text" 
                         className="formControl" 
-                        name="expenseItem" id="expenseItem"
+                        name="expenseItem" 
                         placeholder="Enter household expense" 
                         value={expenseItem}
                         onChange={handleExpenseItem}/>
@@ -19,9 +20,12 @@ const ExpenseForm = ({ expenseItem, amount, handleSubmitClick, handleExpenseItem
 
                     <div className="formGroup">
                         <label htmlFor="amount">amount</label>
-                        <input type="tel"
+                        <input 
+                        id="amount"
+                        type="number"
                         className="formControl" 
-                        name="amount" id="amount"
+                        name="amount" 
+                        pattern="[0-9]"
                         placeholder="Enter dollar amount" 
                         value={amount}
                         onChange={handleExpenseAmount}/>
