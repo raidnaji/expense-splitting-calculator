@@ -1,5 +1,7 @@
 import { Fragment, useState } from 'react';
-import { BsQuestionCircle } from 'react-icons/bs'
+import { MdHelp } from 'react-icons/md'
+import { MdClose } from 'react-icons/md'
+
 
 
 const Header = () => {
@@ -14,17 +16,20 @@ const Header = () => {
         <Fragment>
             <header>
                 <h1>Expense Splitting Calculator
-                    <button
-                        onClick={handleHeaderIconClick}
-                        className={`headerButton ${isActive ? "noDisplay" : ""}`}>
-                        <BsQuestionCircle />
-                    </button>
                 </h1>
+
+                <button
+                    onClick={handleHeaderIconClick}
+                    className={`headerButton ${isActive ? "noDisplay" : ""}`}>
+                    <MdHelp />
+                </button>
 
 
                 <div
                     className={`infoBox ${isActive ? "" : "noDisplay"}`}
                     onClick={handleHeaderIconClick}>
+
+                    <MdClose className="infoBoxButton" />
 
                     <h3>How are your expenses being divided?</h3>
 

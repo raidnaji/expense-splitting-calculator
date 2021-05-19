@@ -26,14 +26,19 @@ body {
 header {
   display: flex;
   justify-content: center;
-  /* border: 2px solid red; */
-  
+  flex-direction: column;  
 }
 
-header button {
-  display: inline-block;
-  font-size: 30px;
-  cursor: pointer;
+h1 {
+  text-align: center;
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+  color: white;
+  letter-spacing: 5px;
+}
+
+h3 {
+  text-align: center;
 }
 
 .headerButton {
@@ -42,12 +47,14 @@ header button {
   padding: 0;
   margin: 0;
   color: white;
-  /* font-size: 26px; */
-  /* height: 0px; */
-  font-size: 24px;
   cursor: pointer;
   position: relative;
-  left: 0.5rem;
+	font-size: 2.5rem;
+	margin-bottom: 1rem;
+}
+
+.headerButton:hover {
+  background:rgb(5, 180, 14);
 }
 
 .infoBox{
@@ -58,7 +65,7 @@ header button {
     width: 30rem;
     padding: 2.3rem;
     top: 15rem;
-    /* left: calc(50% - 15rem) */
+    left: calc(50% - 15rem)
 }
 
 .infoBoxText {
@@ -67,8 +74,12 @@ header button {
   text-align: center;
 }
 
-h3 {
-  text-align: center;
+.infoBoxButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 45px;
+  color: rgb(1, 43, 3);
 }
 
 .noDisplay {
@@ -86,14 +97,6 @@ h3 {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-}
-
-h1 {
-  text-align: center;
-  text-transform: capitalize;
-  margin: 2rem 0;
-  color: white;
-  letter-spacing: 5px;
 }
 
 .forms, .expenseTotal, .incomeBox{
@@ -163,7 +166,6 @@ label {
   display: flex;
   align-items: center;
 }
-
 
 .btnIcon {
   margin-left: 0.75rem;
@@ -319,13 +321,19 @@ footer {
   .forms,
   .list,
   .warning,
-  .incomeBox,
-  .infoBox {
+  .incomeBox, .infoBox {
     width: 90%;
   }
 
   .infoBox {
     padding: 1.5rem;
+    left: 5%;
   }
+
+  .infoBoxButton {
+  top: 7px;
+  right: 7px;
+  font-size: 42px;
+}
 
 }
