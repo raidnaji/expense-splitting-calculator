@@ -1,7 +1,9 @@
 import { Fragment } from 'react'
 
-const IncomeForm = ({ userIncome, partnerIncome }) => {
+const IncomeForm = ({ userIncome, partnerIncome, handleUserInput, handlePartnerInput }) => {
 
+    console.log(userIncome);
+    console.log(partnerIncome);
 
     return (
         <Fragment>
@@ -10,19 +12,24 @@ const IncomeForm = ({ userIncome, partnerIncome }) => {
                     <div className="formGroup">
                         <label htmlFor="expenseItem">Your Annual Income</label>
                         <input
-                            type="tel"
+                            type="number"
                             className="formControl"
                             name="userIncome" id="userIncome"
                             placeholder="Ex. $50,000"
+                            value={userIncome}
+                            onChange={handleUserInput}
                             />
                     </div>
 
                     <div className="formGroup">
                         <label htmlFor="amount">Your Partner's Annual Income</label>
-                        <input type="tel"
+                        <input type="number"
                             className="formControl"
                             name="partnerIncome" id="partnerIncome"
                             placeholder="Ex. $50,000"
+                            value={partnerIncome}
+                            onChange={handlePartnerInput}
+
                              />
                     </div>
 

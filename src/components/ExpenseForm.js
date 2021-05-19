@@ -29,7 +29,7 @@ const ExpenseForm = ({ expenseItem, amount, handleSubmitClick, handleExpenseItem
 
                 </div>
 
-                <button className="btn" type="submit">Enter</button>
+                <button className="btn" type="submit">Submit Expense</button>
 
             </form>
         </Fragment>

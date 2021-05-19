@@ -23,6 +23,19 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
+.container {
+  position: relative;
+  margin: 0 auto;
+}
+
+.contentWrap {
+  max-width: 1270px;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
 h1 {
   text-align: center;
   text-transform: capitalize;
@@ -33,7 +46,6 @@ h1 {
 
 .forms, .expenseTotal, .listBox {
   margin: 0 auto;
-  max-width: 1280px;
   width: 90%;
   background: white;
   padding-bottom: 2rem;
@@ -42,7 +54,6 @@ h1 {
 
 .listBox {
   margin: 0 auto;
-  max-width: 1280px;
   width: 90%;
   background: white;
   padding-bottom: 2rem;
@@ -188,7 +199,6 @@ label {
 }
 
 .expenseTotal {
-  max-width: 1280px;
 	text-align: center;
   margin: 2rem auto;
   padding: 1rem;
@@ -228,7 +238,7 @@ footer {
   .forms,
   .list,
   .warning {
-    width: 70%;
+    width: 75%;
   }
   .list {
     margin: 2rem auto 0 auto;
@@ -242,4 +252,11 @@ footer {
   .formCenter, .formControl {
     flex-direction: column;
   }
+
+  .forms,
+  .list,
+  .warning {
+    width: 90%;
+  }
+
 }

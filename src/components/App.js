@@ -17,8 +17,9 @@ function App() {
   const [expenseItem, setExpenseItem] = useState("");
   const [amount, setAmount] = useState("");
   const [warning, setWarning] = useState({ display: true });
-  const [userIncome, setUserIncome] = useState(50000);
-  const [partnerIncome, setPartnerIncome] = useState(100000);
+
+  const [userIncome, setUserIncome] = useState(30000);
+  const [partnerIncome, setPartnerIncome] = useState(60000);
   const [userIncomeRatio, setUserIncomeRatio] = useState(0);
   const [partnerIncomeRatio, setPartnerIncomeRatio] = useState(0);
 
@@ -61,6 +62,16 @@ function App() {
   }, [expenseItem]);
 
 
+  const handleUserInput = (event) => {
+    let userIncomeInputValue = event.target.value;
+    setUserIncome(userIncomeInputValue);
+  }
+
+  const handlePartnerInput = (event) => {
+    let partnerIncomeInputValue = event.target.value;
+    setPartnerIncome(partnerIncomeInputValue);
+  }
+
   const handleExpenseItem = (event) => {
 
     let expenseItemInputValue = event.target.value;
@@ -88,9 +99,9 @@ function App() {
 
       const expensesRef = firebase.database().ref('expenses');
 
-      
+
       expensesRef.push({ expenseItem, amount });
-      
+
       setAmount("");
       setExpenseItem("");
     } else {
@@ -109,7 +120,7 @@ function App() {
     expensesRef.child(expenseKey).remove();
   }
 
-  useEffect ( () => {
+  useEffect(() => {
 
     let parsedUserIncome = parseInt(userIncome);
     let parsedPartnerIncome = parseInt(partnerIncome);
@@ -127,66 +138,79 @@ function App() {
   }, [userIncome, partnerIncome]);
 
 
-
-
   return (
     <>
-      {warning.display ? <Warning type={warning.type} text={warning.text} /> : null}
-      <Warning />
+      <div className="container">
+        <div className="contentWrap">
 
-      <h1>Expense Splitting Calculator</h1>
+          <div className="warningBox">
+            {warning.display ? <Warning type={warning.type} text={warning.text} /> : null}
+            <Warning />
+          </div>
 
-      <div className="forms">
 
-        <div className="incomeBox">
-          <IncomeForm 
-          userIncome={userIncome} 
-          partnerIncome={partnerIncome} 
-          setUserIncome={setUserIncome}
-          setPartnerIncome={setPartnerIncome}
-          />
+
+          <header>
+            <h1>Expense Splitting Calculator</h1>
+          </header>
+
+          <main>
+
+          <div className="forms">
+
+            <div className="incomeBox">
+              <IncomeForm
+                userIncome={userIncome}
+                partnerIncome={partnerIncome}
+                handleUserInput={handleUserInput}
+                handlePartnerInput={handlePartnerInput}
+              />
+            </div>
+
+            <ExpenseForm
+              expenseItem={expenseItem}
+              amount={amount}
+              handleSubmitClick={handleSubmitClick}
+              handleExpenseItem={handleExpenseItem}
+              handleExpenseAmount={handleExpenseAmount}
+            />
+          </div>
+
+          <div className="expenseTotal">
+            <h2>
+              Total Expenses: <span className="finalExpenses">
+                ${expenses.reduce((accumulator, current) => {
+              return (accumulator += parseInt(current.amount))
+            }, 0)}
+              </span>
+            </h2>
+            <h2>
+              You will pay <span className="total">{Math.round(userIncomeRatio * 100)}%</span> of expenses of <span className="total">${Math.round(expenses.reduce((accumulator, current) => {
+              return (accumulator += parseInt(current.amount) * userIncomeRatio)
+            }, 0))}/month.</span>
+            </h2>
+            <h2>
+              Partner will pay <span className="total">{Math.round(partnerIncomeRatio * 100)}%</span> of expenses of <span className="total">${
+                Math.round(expenses.reduce((accumulator, current) => {
+                  return (accumulator += parseInt(current.amount) * partnerIncomeRatio)
+                }, 0)
+                )}/month.</span>
+            </h2>
+          </div>
+
+          <div className="listBox">
+            <ExpenseList
+              expenses={expenses}
+              handleClearList={handleClearList}
+              handleDelete={handleDelete}
+            />
+          </div>
+          
+          </main>
         </div>
 
-        <ExpenseForm
-          expenseItem={expenseItem}
-          amount={amount}
-          handleSubmitClick={handleSubmitClick}
-          handleExpenseItem={handleExpenseItem}
-          handleExpenseAmount={handleExpenseAmount}
-           />
+        <Footer />
       </div>
-
-      <div className="expenseTotal">
-        <h2>
-          Total Expenses: <span className="finalExpenses">
-            ${expenses.reduce((accumulator, current) => {
-          return (accumulator += parseInt(current.amount))
-        }, 0)}
-          </span>
-        </h2>
-        <h2>
-          You will pay <span className="total">{Math.round(userIncomeRatio * 100)}%</span> of expenses of <span className="total">${Math.round(expenses.reduce((accumulator, current) => {
-            return (accumulator += parseInt(current.amount) * userIncomeRatio)
-          }, 0))}/month.</span>
-        </h2>
-        <h2>
-          Partner will pay <span className="total">{Math.round(partnerIncomeRatio * 100)}%</span> of expenses of <span className="total">${
-            Math.round(expenses.reduce((accumulator, current) => {
-              return (accumulator += parseInt(current.amount) * partnerIncomeRatio)
-            }, 0)
-            )}/month.</span>
-        </h2>
-      </div>
-
-      <div className="listBox">
-        <ExpenseList
-          expenses={expenses}
-          handleClearList={handleClearList}
-          handleDelete={handleDelete}
-           />
-      </div>
-
-      <Footer />
 
     </>
   );
